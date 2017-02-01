@@ -1,0 +1,35 @@
+body {
+    padding: 50px;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+header {
+    background: #43A047;
+}
+
+header p {
+    margin: 0px;
+    padding-left: 80%;
+}
+
+header img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+a {
+    color: #00B7FF;
+}
+
+article {
+    border: 1px solid black;
+}
+
+table th {
+    padding: 20px;
+}
+
+table th input {
+    padding: 5px;
+}
