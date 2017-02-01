@@ -57,9 +57,5 @@ router.post('/signup/check_nickname', function (req, res) {
     });
 });
 
-router.post('/signup/check_pwd', function (req, res) {
-
-});
-
 
 module.exports = router;
