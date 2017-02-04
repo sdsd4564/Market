@@ -4,17 +4,76 @@
     <meta charset="utf-8">
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <style>
+        #columns {
+            column-width: 300px;
+            column-gap: 15px;
+        }
+
+        #columns figure {
+            display: inline-block;
+            border: solid 1px rgba(0, 0, 0, 0.2);
+            margin: 0;
+            margin-bottom: 20px;
+            padding: 10px;
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        #columns figure img {
+            width: 100%;
+        }
+
+        #columns figure figcaption {
+            border-top: solid 1px rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            margin-top: 10px;
+        }
+
+        #p_title {
+            text-align: start;
+            font-size: 30px;
+            margin: 0;
+        }
+
+        #p_price {
+            text-align: end;
+            font-size: 25px;
+            font-family: "Arial Rounded MT Bold";
+        }
+
+    </style>
 </head>
 <body>
 <header>
     <p>
-        <input type="button" value="로그인" id="signin" onclick="location.href='/users'">
-        <input type="button" value="회원가입" id="signup" onclick="location.href='/signup'">
+        <% if (!user.userId) { %>
+        <input type="button" value="로그인" id="signin" onclick="location.href='/signin'">
+        <input type="button" value="회원가입" id="signup" onclick="location.href='/signUp'">
+        <% } else { %>
+        <%= user.nickname %>님(<%= user.userId %>)
+        <input type="button" value="로그아웃" id="signout" onclick="location.href='/signout'">
+        <% } %>
     </p>
-    <img src="/images/wolf.png" height="150px">
+    <center>
+        <p><h1>SYSLET MARKET</h1></p>
+        <a href="/"><img src="/images/shopping-cart.png" height="150px"></a>
+    </center>
+
 </header>
 <article>
-    <center><h1>아직 한발 남았다...</h1></center>
+    <div id="columns">
+        <% products.forEach(function (obj) { %>
+        <figure onclick="location.href=('<%='/category/'+obj.pid%>')">
+            <img src="<%= obj.image %>">
+            <figcaption>
+                <p id="p_title"><%= obj.title %></p>
+                <p id="p_price"><%= obj.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") %>원</p>
+                <%= obj.description %>
+                <p><%= obj.nickname %>(<%= obj.id %>)</p>
+            </figcaption>
+        </figure>
+        <% }); %>
+    </div>
 </article>
 </body>
 </html>

@@ -41,14 +41,14 @@
             const passwordRules = /^.*(?=.{6,20})(?=.*[0-9])(?=.*[a-zA-Z]).*$/;
 
             function checkId() {
-                $.post('/signup/check_id', {id: $('#id_form').val()},
+                $.post('/signUp/check_id', {id: $('#id_form').val()},
                     function (res, req) {
                         if (form.id.value) {
                             if (res && idRules.test(form.id.value)) {
                                 form.id_status.value = '사용 가능한 아이디입니다';
                                 form.id_status.style.color = 'green';
                                 form.id_check.value = true;
-                            } else if (!res){
+                            } else if (!res) {
                                 form.id_status.value = '이미 존재하는 아이디입니다';
                                 form.id_status.style.color = 'red';
                                 form.id_check.value = false;
@@ -64,7 +64,7 @@
             function checkNickname() {
                 const nickName = form.nickname.value;
                 const nickStatus = form.nick_status;
-                $.post('/signup/check_nickname', {nickname: $('#nick_form').val()},
+                $.post('/signUp/check_nickname', {nickname: $('#nick_form').val()},
                     function (res, req) {
 
                         if (nickName) {
@@ -128,15 +128,18 @@
 <body>
 <header>
     <p>
-        <input type="button" value="로그인" id="signin" onclick="location.href='/users'">
-        <input type="button" value="회원가입" id="signup" onclick="location.href='/signup'">
+        <input type="button" value="로그인" id="signin" onclick="location.href='/signin'">
+        <input type="button" value="회원가입" id="signup" onclick="location.href='/signUp'">
     </p>
-    <img src="/images/wolf.png" height="150px">
+    <center>
+        <p><h1>SYSLET MARKET</h1></p>
+        <a href="/"><img src="/images/shopping-cart.png" height="150px"></a>
+    </center>
 </header>
 <article>
     <center>
         <form method="POST" name="signup_form">
-            <table style="padding-top: 50px">
+            <table>
                 <tr>
                     <th>아이디</th>
                     <th><input type="text" name="id" id="id_form" maxlength="20" tabindex="1"

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+</head>
+<body>
+<header>
+    <p>
+        <input type="button" value="로그인" id="signin" onclick="location.href='/signin'">
+        <input type="button" value="회원가입" id="signup" onclick="location.href='/signUp'">
+    </p>
+    <center>
+        <p><h1>SYSLET MARKET</h1></p>
+        <a href="/"><img src="/images/shopping-cart.png" height="150px"></a>
+    </center>
+</header>
+<article>
+    <center>
+        <form method="post">
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th><input type="text" name="id"></th>
+                </tr>
+                <tr>
+                    <th>PWD</th>
+                    <th><input type="password" name="pwd"></th>
+                </tr>
+                <tr>
+                    <th colspan="2"><input type="submit"></th>
+                </tr>
+            </table>
+        </form>
+    </center>
+</article>
+</body>
+</html>

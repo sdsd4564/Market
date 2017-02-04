@@ -1,13 +1,23 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../MySQLm');
+const db = require('../mysql');
 const uuid = require('uuid');
 const sha = require('sha256');
 
 
 /* 회원가입 */
 router.get('/signup', function (req, res, next) {
-    res.render('signup', {title: 'Wolf'});
+    req.session.userId
+        ? res.send(
+            '<script>' +
+            'alert("이미 로그인이 되어있습니다. 로그아웃 후 시도하십시오.");' +
+            'location.href=("/");</script>'
+        )
+        : res.render('signup', {
+            title: 'Syslet',
+            user: req.session
+        });
+
 });
 
 router.post('/signup', function (req, res) {
