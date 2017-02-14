@@ -5,10 +5,13 @@ const db = require('../mysql');
 /* GET home page. */
 router.get('/', function (req, res, next) {
 
-    const query1 = 'SELECT pid, id, nickname, regdate, title, price, description, image, product.region ' +
+    const query1 = 'SELECT pid, id, nickname, regdate, title, price, ' +
+        'description, image, product.region, category.name ' +
         'FROM product ' +
-        'LEFT JOIN user ' +
-        'ON product.seller = user.uid';
+        'LEFT OUTER JOIN user ' +
+        'ON product.seller = user.uid ' +
+        'LEFT OUTER JOIN category ' +
+        'ON category.cid = product.category';
 
     db.query(query1, function (error, data) {
         if (error) console.error(error);
@@ -21,8 +24,5 @@ router.get('/', function (req, res, next) {
     });
 });
 
-router.get('/category/:pid', function (req, res) {
-    res.send('pid : ' + req.params.pid);
-});
 
 module.exports = router;

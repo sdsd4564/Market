@@ -33,7 +33,12 @@ router.post('/signin', function (req, res) {
                 return;
             }
         }
-        res.redirect('/signin');
+
+        res.send('' +
+            '<script>' +
+            'alert("존재하지 않는 아이디거나 비밀번호가 일치하지 않습니다.");' +
+            'location.href="/signin"' +
+            '</script>');
     });
 });
 

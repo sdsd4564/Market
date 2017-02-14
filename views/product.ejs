@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+</head>
+<body>
+<header>
+    <p>
+        <% if (!user.userId) { %>
+        <input type="button" value="로그인" id="signin" onclick="location.href='/signin'">
+        <input type="button" value="회원가입" id="signup" onclick="location.href='/signUp'">
+        <% } else { %>
+        <%= user.nickname %>님(<%= user.userId %>)
+        <input type="button" value="로그아웃" id="signout" onclick="location.href='/signout'">
+        <% } %>
+    </p>
+    <center>
+        <p>
+        <h1>SYSLET MARKET</h1></p>
+        <a href="/"><img src="/images/shopping-cart.png" height="150px"></a>
+    </center>
+
+</header>
+<article>
+    <h1><%= product[0].title %></h1>
+</article>
+</body>
+</html>

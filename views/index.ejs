@@ -26,6 +26,7 @@
         #columns figure figcaption {
             border-top: solid 1px rgba(0, 0, 0, 0.2);
             padding: 10px;
+            padding-bottom: 0;
             margin-top: 10px;
         }
 
@@ -55,7 +56,8 @@
         <% } %>
     </p>
     <center>
-        <p><h1>SYSLET MARKET</h1></p>
+        <p>
+        <h1>SYSLET MARKET</h1></p>
         <a href="/"><img src="/images/shopping-cart.png" height="150px"></a>
     </center>
 
@@ -63,13 +65,15 @@
 <article>
     <div id="columns">
         <% products.forEach(function (obj) { %>
-        <figure onclick="location.href=('<%='/category/'+obj.pid%>')">
+        <figure onclick="location.href=('<%= '/' + obj.name + '/' + obj.pid %>')">
             <img src="<%= obj.image %>">
             <figcaption>
                 <p id="p_title"><%= obj.title %></p>
-                <p id="p_price"><%= obj.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") %>원</p>
-                <%= obj.description %>
-                <p><%= obj.nickname %>(<%= obj.id %>)</p>
+                <p id="p_price"><%= obj.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") %>원</p> <!-- Again... -->
+                <div style="margin: 0; text-align: center">
+                    <%= obj.nickname %>(<%= obj.id %>)
+                    <%= obj.regdate %>
+                </div>
             </figcaption>
         </figure>
         <% }); %>

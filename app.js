@@ -7,10 +7,12 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const MySQLStore = require('express-mysql-session')(session);
+
 const index = require('./routes/index');
 const users = require('./routes/users');
 const signUp = require('./routes/signup');
 const signIn = require('./routes/signin');
+const product = require('./routes/product');
 
 let app = express();
 
@@ -29,9 +31,7 @@ app.use(express.static(path.join(__dirname, 'public'))); // <- 정적 파일 사
 app.use(session({
     secret: 'vacation project in Syslet lab',
     resave: 'false',
-    cookie: {
-      maxAge: 1000 * 60 * 60
-    },
+    cookie: {maxAge: 1000 * 60 * 60},
     saveUninitialized: true,
     store: new MySQLStore({
         host: 'localhost',
@@ -46,6 +46,7 @@ app.use('/', index);
 app.use('/users', users);
 app.use(signUp);
 app.use(signIn);
+app.use(product);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
