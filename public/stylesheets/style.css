@@ -1,8 +1,22 @@
+html {
+    width: auto;
+}
+
 body {
     padding-top: 0px;
     padding-left: 80px;
     padding-right: 80px;
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+input {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    border-radius: 0px;
+    border: 1px solid #bcbcbc;
+    height: 30px;
 }
 
 header {
@@ -23,7 +37,7 @@ header img {
     padding: 20px;
 }
 
-header center h1{
+header center h1 {
     margin-bottom: 0;
     font-size: 30px;
     font-family: "맑은 고딕";
@@ -40,4 +54,38 @@ table th {
 
 table th input {
     padding: 5px;
+}
+
+#jb-container {
+    width: 760px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #bcbcbc;
+}
+
+#jb-header {
+    padding: 20px;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+#jb-content {
+    width: 400px;
+    margin-bottom: 20px;
+    float: left;
+    background-color: black;
+}
+
+#jb-sidebar {
+    width: 400px;
+    padding: 20px;
+    margin: 20px auto;
+    float: right;
+    border: 1px solid #bcbcbc;
+}
+
+#jb-footer {
+    clear: both;
+    padding: 20px;
+    border: 1px solid #bcbcbc;
 }
