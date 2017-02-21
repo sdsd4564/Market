@@ -24,27 +24,29 @@
 
 </header>
 <article>
-    <center>
-        <div id="jb-container">
-            <div id="jb-header">
-                <h1><%= product[0].title %></h1>
-            </div>
-            <div id="jb-content">
-                <img src="<%= product[0].image %>" height="500px">
-            </div>
-            <div id="jb-sidebar">
-                <h2>Sidebar</h2>
-                <ul>
-                    <li>Lorem</li>
-                    <li>Ipsum</li>
-                    <li>Dolor</li>
-                </ul>
-            </div>
-            <div id="jb-footer">
-                <p>Copyright</p>
-            </div>
+    <div id="jb-container">
+        <div id="jb-content">
+            <img src="<%= product[0].image %>" align="center">
         </div>
-    </center>
+        <div id="jb-sidebar">
+            <h1 class="pName"><%= product[0].title %></h1>
+            <center>
+            <table>
+                <tr>
+                    <th><h4 class="pInfo">가격</h4></th>
+                    <th><h2 class="pInfo"><%= product[0].price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") %>원</h2></th>
+                </tr>
+                <tr>
+                    <th><h4 class="pInfo">거래지역</h4></th>
+                    <th><h3 class="pInfo"><%= product[0].region %></h3></th>
+                </tr>
+            </table>
+            </center>
+        </div>
+        <div id="jb-footer">
+            <p>Copyright</p>
+        </div>
+    </div>
 </article>
 </body>
 </html>

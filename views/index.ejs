@@ -4,45 +4,6 @@
     <meta charset="utf-8">
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css'/>
-    <style>
-        #columns {
-            column-width: 300px;
-            column-gap: 15px;
-        }
-
-        #columns figure {
-            display: inline-block;
-            border: solid 1px rgba(0, 0, 0, 0.2);
-            margin: 0;
-            margin-bottom: 20px;
-            padding: 10px;
-            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        #columns figure img {
-            width: 100%;
-        }
-
-        #columns figure figcaption {
-            border-top: solid 1px rgba(0, 0, 0, 0.2);
-            padding: 10px;
-            padding-bottom: 0;
-            margin-top: 10px;
-        }
-
-        #p_title {
-            text-align: start;
-            font-size: 30px;
-            margin: 0;
-        }
-
-        #p_price {
-            text-align: end;
-            font-size: 25px;
-            font-family: "Arial Rounded MT Bold";
-        }
-
-    </style>
 </head>
 <body>
 <header>
@@ -56,8 +17,7 @@
         <% } %>
     </p>
     <center>
-        <p>
-        <h1>SYSLET MARKET</h1></p>
+        <h1>SYSLET MARKET</h1>
         <a href="/"><img src="/images/shopping-cart.png" height="150px"></a>
     </center>
 
@@ -71,7 +31,7 @@
                 <p id="p_title"><%= obj.title %></p>
                 <p id="p_price"><%= obj.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") %>원</p> <!-- Again... -->
                 <div style="margin: 0; text-align: center">
-                    <%= obj.nickname %>(<%= obj.id %>)
+                    <%= obj.nickname %>(<%= obj.id %>)<br>
                     <%= obj.regdate %>
                 </div>
             </figcaption>
