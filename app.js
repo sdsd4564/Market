@@ -13,6 +13,7 @@ const users = require('./routes/users');
 const signUp = require('./routes/signup');
 const signIn = require('./routes/signin');
 const product = require('./routes/product');
+const writeProduct = require('./routes/writeProduct');
 
 let app = express();
 
@@ -47,6 +48,7 @@ app.use('/users', users);
 app.use(signUp);
 app.use(signIn);
 app.use(product);
+app.use(writeProduct);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

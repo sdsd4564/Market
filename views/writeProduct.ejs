@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <script src="/ckeditor/ckeditor.js"></script>
+</head>
+<body>
+<header>
+    <p>
+        <% if (!user.userId) { %>
+        <input type="button" value="로그인" id="signin" onclick="location.href='/signin'">
+        <input type="button" value="회원가입" id="signup" onclick="location.href='/signUp'">
+        <% } else { %>
+        <%= user.nickname %>님(<%= user.userId %>)
+        <input type="button" value="로그아웃" id="signout" onclick="location.href='/signout'">
+        <% } %>
+    </p>
+    <center>
+        <h1>SYSLET MARKET</h1>
+        <a href="/"><img src="/images/shopping-cart.png" height="150px"></a>
+    </center>
+</header>
+<article>
+    <form method="post">
+        <textarea name="editor1" id="editor1" rows="10" cols="80">
+            상품에 대한 정보를 입력해주세요
+        </textarea>
+        <input type="submit">
+    </form>
+    <script>
+        // Replace the <textarea id="editor1"> with a CKEditor
+        // instance, using default configuration.
+        CKEDITOR.replace('editor1', {
+            filebrowserUploadUrl: '/writeProduct'
+        });
+    </script>
+</article>
+</body>
+</html>
