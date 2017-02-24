@@ -21,11 +21,11 @@ header {
     background: #43A047;
 }
 
-header p {
+.userFunction {
     margin: 0;
-    padding-left: 80%;
     color: white;
     font-size: 16px;
+    float: right;
 }
 
 header img {
@@ -124,7 +124,7 @@ table th input {
     vertical-align: middle;
 }
 
-#jb-sidebar th{
+#jb-sidebar th {
     padding: 0 10px 0 10px;
 }
 
@@ -138,5 +138,14 @@ h1.pName {
 }
 
 .pInfo {
-    margin: 10px 5px 10px 5px ;
+    margin: 10px 5px 10px 5px;
+}
+
+#pw_category {
+    height: 30px;
+    float: left;
+}
+
+#pw_price {
+    margin: 10px 0 10px 0;
 }
