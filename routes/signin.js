@@ -20,13 +20,13 @@ router.get('/signin', function (req, res) {
 router.post('/signin', function (req, res) {
     const body = req.body;
 
-    db.query('SELECT id, pwd, salt, nickname FROM user', function (error, rows) {
+    db.query('SELECT uid, id, pwd, salt, nickname FROM user', function (error, rows) {
         if (error) console.error(error);
 
 
         for (let i in rows) {
             if (body.id === rows[i].id && sha(body.pwd + rows[i].salt) === rows[i].pwd) {
-                req.uid = rows[i].uid;
+                req.session.uid = rows[i].uid;
                 req.session.userId = rows[i].id;
                 req.session.nickname = rows[i].nickname;
                 res.redirect('/');
