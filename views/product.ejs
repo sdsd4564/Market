@@ -31,20 +31,26 @@
         <div id="jb-sidebar">
             <h1 class="pName"><%= product[0].title %></h1>
             <center>
-            <table>
-                <tr>
-                    <th><h4 class="pInfo">가격</h4></th>
-                    <th><h2 class="pInfo"><%= product[0].price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") %>원</h2></th>
-                </tr>
-                <tr>
-                    <th><h4 class="pInfo">거래지역</h4></th>
-                    <th><h3 class="pInfo"><%= product[0].region %></h3></th>
-                </tr>
-            </table>
+                <table>
+                    <tr>
+                        <th><h4 class="pInfo">가격</h4></th>
+                        <th><h2 class="pInfo"><%= product[0].price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") %>
+                                원</h2></th>
+                    </tr>
+                    <tr>
+                        <th><h4 class="pInfo">거래지역</h4></th>
+                        <th><h3 class="pInfo"><%= product[0].region %></h3></th>
+                    </tr>
+                    <tr>
+                        <th style="padding: 50px 0 40px 0;" colspan="2" rowspan="3">
+                            <a href='#' class='button'>Button</a>
+                        </th>
+                    </tr>
+                </table>
             </center>
         </div>
         <div id="jb-footer">
-            <p>Copyright</p>
+            <p><%- product[0].description %></p>
         </div>
     </div>
 </article>

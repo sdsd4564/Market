@@ -100,7 +100,7 @@ table th input {
 
 #jb-content {
     width: 50%;
-    margin: 0 auto;
+    margin: 0 auto 10px 0;
     float: left;
     background-color: #0e0e0e;
     padding: 5px 0 5px 0;
@@ -131,6 +131,7 @@ table th input {
 #jb-footer {
     clear: both;
     padding: 20px;
+    border: 1px solid gray;
 }
 
 h1.pName {
@@ -148,4 +149,52 @@ h1.pName {
 
 #pw_price {
     margin: 10px 0 10px 0;
+}
+
+.button {
+    border: 1px solid #313e45;
+    background: #f7d2d2;
+    background: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#f7d2d2));
+    background: -webkit-linear-gradient(top, #ffffff, #f7d2d2);
+    background: -moz-linear-gradient(top, #ffffff, #f7d2d2);
+    background: -ms-linear-gradient(top, #ffffff, #f7d2d2);
+    background: -o-linear-gradient(top, #ffffff, #f7d2d2);
+    background-image: -ms-linear-gradient(top, #ffffff 0%, #f7d2d2 100%);
+    padding: 17.5px 35px;
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    border-radius: 7px;
+    -webkit-box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(255,255,255,0.4) 0 1px 0;
+    -moz-box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(255,255,255,0.4) 0 1px 0;
+    box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(255,255,255,0.4) 0 1px 0;
+    text-shadow: #7ea4bd 0 1px 0;
+    color: #000000;
+    font-size: 24px;
+    font-family: helvetica, serif;
+    text-decoration: none;
+    vertical-align: middle;
+}
+.button:hover {
+    border: 1px solid #102938;
+    text-shadow: #1e4158 0 1px 0;
+    background: #f0b2e2;
+    background: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#f0b2e2));
+    background: -webkit-linear-gradient(top, #ffffff, #f0b2e2);
+    background: -moz-linear-gradient(top, #ffffff, #f0b2e2);
+    background: -ms-linear-gradient(top, #ffffff, #f0b2e2);
+    background: -o-linear-gradient(top, #ffffff, #f0b2e2);
+    background-image: -ms-linear-gradient(top, #ffffff 0%, #f0b2e2 100%);
+    color: #fff;
+}
+.button:active {
+    text-shadow: #1e4158 0 1px 0;
+    border: 1px solid #0a3c59;
+    background: #e65c8a;
+    background: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#f0b2e2));
+    background: -webkit-linear-gradient(top, #ffffff, #e65c8a);
+    background: -moz-linear-gradient(top, #ffffff, #e65c8a);
+    background: -ms-linear-gradient(top, #ffffff, #e65c8a);
+    background: -o-linear-gradient(top, #ffffff, #e65c8a);
+    background-image: -ms-linear-gradient(top, #ffffff 0%, #e65c8a 100%);
+    color: #fff;
 }

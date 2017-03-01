@@ -19,7 +19,7 @@ router.get('/writeProduct', function (req, res) {
         res.send('' +
             '<script>' +
             'alert("로그인이 되지 않았습니다. 먼저 로그인부터 해주세요");' +
-            'location.href="/signin"' +
+            'location.href="/signin";' +
             '</script>');
     }
 });
@@ -43,6 +43,7 @@ router.post('/writeProduct', function (req, res) {
                         console.log(pLocation);
                         res.send('' +
                         '<script>' +
+                            '   alert("물품 등록을 완료했습니다");' +
                             '   history.pushState(null, null, location.href);' +
                             '   window.onpopstate = function (event) {' +
                             '       history.go(1);' +
@@ -56,6 +57,7 @@ router.post('/writeProduct', function (req, res) {
 
 });
 
+// 이미지 업로드 미드뤠어
 router.post('/uploader', multipartMiddleware, function (req, res) {
     const fs = require('fs');
 
