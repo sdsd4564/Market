@@ -4,6 +4,15 @@
     <meta charset="utf-8">
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io('//localhost:5874');
+        socket.on('socketToMe', function (data) {
+            console.log(data);
+        });
+
+    </script>
 </head>
 <body>
 <header>

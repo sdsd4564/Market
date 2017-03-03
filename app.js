@@ -8,14 +8,23 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const MySQLStore = require('express-mysql-session')(session);
 
+const app = express();
+const server = require('http').Server(app);
+const io = require('socket.io')(server);
+
+app.use(function (req, res, next) {
+    res.io = io;
+    next();
+});
+
 const index = require('./routes/index');
 const users = require('./routes/users');
 const signUp = require('./routes/signup');
 const signIn = require('./routes/signin');
 const product = require('./routes/product');
+
 const writeProduct = require('./routes/writeProduct');
 
-let app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -50,6 +59,8 @@ app.use(signIn);
 app.use(product);
 app.use(writeProduct);
 
+
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     let err = new Error('Not Found');
@@ -68,4 +79,7 @@ app.use(function (err, req, res, next) {
     res.render('error');
 });
 
-module.exports = app;
+module.exports = {
+    app: app,
+    server: server
+};
