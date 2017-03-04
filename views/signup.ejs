@@ -1,218 +1,189 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css'/>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script language="JavaScript">
-        function checkForm() {
-            const idRules = /^[a-z0-9_]{5,20}$/;
-            const passwordRules = /^.*(?=.{6,20})(?=.*[0-9])(?=.*[a-zA-Z]).*$/;
-            const form = document.signup_form;
+<% layout('layout') %>
+<script language="JavaScript">
+    function checkForm() {
+        const idRules = /^[a-z0-9_]{5,20}$/;
+        const passwordRules = /^.*(?=.{6,20})(?=.*[0-9])(?=.*[a-zA-Z]).*$/;
+        const form = document.signup_form;
 
-            if (!form.id.value) {
-                alert('아이디를 입력해주세요.')
-            } else if (!idRules.test(form.id.value)) {
-                alert('적절하지 않은 아이디입니다.')
-            } else if (!passwordRules.test(form.pwd.value)) {
-                alert('비밀번호를 올바르게 입력해주세요.')
-            } else if (form.pwd.value != form.checkPwd.value) {
-                form.status.value = "[일치하지 않습니다]"
-            } else if (!form.nickname.value) {
-                alert('닉네임을 입력해주세요.')
-            } else if (!form.email.value) {
-                alert('이메일을 입력해주세요.')
-            } else if (!form.region.value) {
-                alert('선호하는 거래지역을 입력해주세요.')
-            } else if (!form.phone.value) {
-                alert('휴대폰 번호를 입력해주세요.')
-            } else if (!(form.id_check.value.booleanValue && form.nick_check.value.booleanValue)) {
-                alert('아이디나 닉네임이 중복되었습니다.')
+        if (!form.id.value) {
+            alert('아이디를 입력해주세요.')
+        } else if (!idRules.test(form.id.value)) {
+            alert('적절하지 않은 아이디입니다.')
+        } else if (!passwordRules.test(form.pwd.value)) {
+            alert('비밀번호를 올바르게 입력해주세요.')
+        } else if (form.pwd.value != form.checkPwd.value) {
+            form.status.value = "[일치하지 않습니다]"
+        } else if (!form.nickname.value) {
+            alert('닉네임을 입력해주세요.')
+        } else if (!form.email.value) {
+            alert('이메일을 입력해주세요.')
+        } else if (!form.region.value) {
+            alert('선호하는 거래지역을 입력해주세요.')
+        } else if (!form.phone.value) {
+            alert('휴대폰 번호를 입력해주세요.')
+        } else if (!(form.id_check.value.booleanValue && form.nick_check.value.booleanValue)) {
+            alert('아이디나 닉네임이 중복되었습니다.')
+        } else {
+            form.submit();
+        }
+    }
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        const form = document.signup_form;
+        const idRules = /^[a-z0-9_]{5,20}$/;
+        const passwordRules = /^.*(?=.{6,20})(?=.*[0-9])(?=.*[a-zA-Z]).*$/;
+
+        function checkId() {
+            $.post('/signUp/check_id', {id: $('#id_form').val()},
+                function (res, req) {
+                    if (form.id.value) {
+                        if (res && idRules.test(form.id.value)) {
+                            form.id_status.value = '사용 가능한 아이디입니다';
+                            form.id_status.style.color = 'green';
+                            form.id_check.value = true;
+                        } else if (!res) {
+                            form.id_status.value = '이미 존재하는 아이디입니다';
+                            form.id_status.style.color = 'red';
+                            form.id_check.value = false;
+                        } else {
+                            form.id_status.value = '부적절한 아이디입니다.';
+                            form.id_status.style.color = 'red';
+                            form.id_check.value = false;
+                        }
+                    } else form.id_status.value = '';
+                })
+        }
+
+        function checkNickname() {
+            const nickName = form.nickname.value;
+            const nickStatus = form.nick_status;
+            $.post('/signUp/check_nickname', {nickname: $('#nick_form').val()},
+                function (res, req) {
+
+                    if (nickName) {
+                        if (res) {
+                            nickStatus.value = '사용 가능한 닉네임입니다';
+                            nickStatus.style.color = 'green';
+                            form.nick_check.value = true;
+                        } else {
+                            nickStatus.value = '이미 존재하는 닉네임입니다';
+                            nickStatus.style.color = 'red';
+                            form.nick_check.value = false;
+                        }
+                    } else nickStatus.value = '';
+                })
+        }
+
+        function checkPwd() {
+            const password = form.pwd.value;
+            const pwdStatus = form.pwd_status;
+
+            if (password) {
+                if (passwordRules.test(password)) {
+                    pwdStatus.value = '올바른 비밀번호입니다';
+                    pwdStatus.style.color = 'green';
+                } else {
+                    pwdStatus.value = '조건에 맞지 않습니다'
+                    pwdStatus.style.color = 'red';
+                }
             } else {
-                form.submit();
+                pwdStatus.value = '';
             }
         }
-    </script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            const form = document.signup_form;
-            const idRules = /^[a-z0-9_]{5,20}$/;
-            const passwordRules = /^.*(?=.{6,20})(?=.*[0-9])(?=.*[a-zA-Z]).*$/;
 
-            function checkId() {
-                $.post('/signUp/check_id', {id: $('#id_form').val()},
-                    function (res, req) {
-                        if (form.id.value) {
-                            if (res && idRules.test(form.id.value)) {
-                                form.id_status.value = '사용 가능한 아이디입니다';
-                                form.id_status.style.color = 'green';
-                                form.id_check.value = true;
-                            } else if (!res) {
-                                form.id_status.value = '이미 존재하는 아이디입니다';
-                                form.id_status.style.color = 'red';
-                                form.id_check.value = false;
-                            } else {
-                                form.id_status.value = '부적절한 아이디입니다.';
-                                form.id_status.style.color = 'red';
-                                form.id_check.value = false;
-                            }
-                        } else form.id_status.value = '';
-                    })
-            }
+        function checkPwd2() {
+            const checkPW = form.checkPwd.value;
+            const pwdStatus2 = form.pwd_status2;
 
-            function checkNickname() {
-                const nickName = form.nickname.value;
-                const nickStatus = form.nick_status;
-                $.post('/signUp/check_nickname', {nickname: $('#nick_form').val()},
-                    function (res, req) {
-
-                        if (nickName) {
-                            if (res) {
-                                nickStatus.value = '사용 가능한 닉네임입니다';
-                                nickStatus.style.color = 'green';
-                                form.nick_check.value = true;
-                            } else {
-                                nickStatus.value = '이미 존재하는 닉네임입니다';
-                                nickStatus.style.color = 'red';
-                                form.nick_check.value = false;
-                            }
-                        } else nickStatus.value = '';
-                    })
-            }
-
-            function checkPwd() {
-                const password = form.pwd.value;
-                const pwdStatus = form.pwd_status;
-
-                if (password) {
-                    if (passwordRules.test(password)) {
-                        pwdStatus.value = '올바른 비밀번호입니다';
-                        pwdStatus.style.color = 'green';
-                    } else {
-                        pwdStatus.value = '조건에 맞지 않습니다'
-                        pwdStatus.style.color = 'red';
-                    }
+            if (checkPW) {
+                if (checkPW === form.pwd.value) {
+                    pwdStatus2.value = '일치합니다';
+                    pwdStatus2.style.color = 'green';
                 } else {
-                    pwdStatus.value = '';
+                    pwdStatus2.value = '일치하지 않습니다';
+                    pwdStatus2.style.color = 'red';
                 }
-            }
+            } else
+                pwdStatus2.value = '';
+        }
 
-            function checkPwd2() {
-                const checkPW = form.checkPwd.value;
-                const pwdStatus2 = form.pwd_status2;
+        $('#id_form').on('keyup', checkId);
+        $('#id_form').on('blur', checkId);
+        $('#nick_form').on('keyup', checkNickname);
+        $('#nick_form').on('blur', checkNickname);
+        $('#pwd_form').on('keyup', checkPwd);
+        $('#pwd_form').on('blur', checkPwd);
+        $('#check_pwd_form').on('keyup', checkPwd2);
+        $('#check_pwd_form').on('blur', checkPwd2);
+    })
+</script>
+<center>
+    <form method="POST" name="signup_form">
+        <table>
+            <tr>
+                <th>아이디</th>
+                <th><input type="text" name="id" id="id_form" maxlength="20" tabindex="1"
+                           style="ime-mode: disabled"></th>
+                <th>
+                    <input type="text" name="id_status" tabindex="0" disabled
+                           style="background-color:white; border: 0; width: 100%;">
+                    <input type="hidden" name="id_check" id="id_check" value=false>
+                </th>
+            </tr>
+            <tr>
+                <th>비밀번호</th>
+                <th><input type="password" name="pwd" id="pwd_form" tabindex="2" maxlength="20"></th>
+                <th><input type="text" name="pwd_status" disabled width="100%"
+                           style="background-color:white; border: 0; width: 100%;"></th>
+            </tr>
+            <tr>
+                <th colspan="3" style="padding: 0%; font-size: 10pt; color: brown;">
+                    <p>* 6~20자의 대소문자와 숫자가 포함되어야 합니다.</p>
+                </th>
+            </tr>
+            <tr>
+                <th>비밀번호 확인</th>
+                <th><input type="password" name="checkPwd" id="check_pwd_form" tabindex="3" maxlength="20"></th>
+                <th><input type="text" name="pwd_status2" disabled
+                           style="background-color:white; border: 0; width: 100%;"></th>
+            </tr>
 
-                if (checkPW) {
-                    if (checkPW === form.pwd.value) {
-                        pwdStatus2.value = '일치합니다';
-                        pwdStatus2.style.color = 'green';
-                    } else {
-                        pwdStatus2.value = '일치하지 않습니다';
-                        pwdStatus2.style.color = 'red';
-                    }
-                } else
-                    pwdStatus2.value = '';
-            }
-
-            $('#id_form').on('keyup', checkId)
-            $('#id_form').on('blur', checkId)
-            $('#nick_form').on('keyup', checkNickname)
-            $('#nick_form').on('blur', checkNickname)
-            $('#pwd_form').on('keyup', checkPwd);
-            $('#pwd_form').on('blur', checkPwd);
-            $('#check_pwd_form').on('keyup', checkPwd2);
-            $('#check_pwd_form').on('blur', checkPwd2);
-        })
-    </script>
-</head>
-<body>
-<header>
-    <div class="userFunction">
-        <% if (!user.userId) { %>
-        <input type="button" value="로그인" id="signin" onclick="location.href='/signin'">
-        <input type="button" value="회원가입" id="signup" onclick="location.href='/signUp'">
-        <% } else { %>
-        <%= user.nickname %>님(<%= user.userId %>)
-        <input type="button" value="로그아웃" id="signout" onclick="location.href='/signout'">
-        <input type="button" value="물품등록" id="writeproduct" onclick="location.href='/writeproduct'">
-        <% } %>
-    </div>
-    <div style="clear: both;">
-        <center>
-            <a href="/"><img src="/images/shopping-cart.png" height="150px"></a>
-        </center>
-    </div>
-</header>
-<article>
-    <center>
-        <form method="POST" name="signup_form">
-            <table>
-                <tr>
-                    <th>아이디</th>
-                    <th><input type="text" name="id" id="id_form" maxlength="20" tabindex="1"
-                               style="ime-mode: disabled"></th>
-                    <th>
-                        <input type="text" name="id_status" tabindex="0" disabled
-                               style="background-color:white; border: 0; width: 100%;">
-                        <input type="hidden" name="id_check" id="id_check" value=false>
-                    </th>
-                </tr>
-                <tr>
-                    <th>비밀번호</th>
-                    <th><input type="password" name="pwd" id="pwd_form" tabindex="2" maxlength="20"></th>
-                    <th><input type="text" name="pwd_status" disabled width="100%"
-                               style="background-color:white; border: 0; width: 100%;"></th>
-                </tr>
-                <tr>
-                    <th colspan="3" style="padding: 0%; font-size: 10pt; color: brown;">
-                        <p>* 6~20자의 대소문자와 숫자가 포함되어야 합니다.</p>
-                    </th>
-                </tr>
-                <tr>
-                    <th>비밀번호 확인</th>
-                    <th><input type="password" name="checkPwd" id="check_pwd_form" tabindex="3" maxlength="20"></th>
-                    <th><input type="text" name="pwd_status2" disabled
-                               style="background-color:white; border: 0; width: 100%;"></th>
-                </tr>
-
-                <tr>
-                    <th>닉네임</th>
-                    <th><input type="text" name="nickname" tabindex="4" maxlength="12" id="nick_form"
-                               placeholder="12자 이하여야 합니다. ">
-                    </th>
-                    <th>
-                        <input type="text" name="nick_status" readonly disabled tabindex="0"
-                               style="background-color:white; color: maroon; border: 0; width: 100%;">
-                        <input type="hidden" name="nick_check" id="nick_check" value=false>
-                    </th>
-                </tr>
-                <tr>
-                    <th>이메일 주소</th>
-                    <th><input type="email" name="email" max="40" placeholder="abc@def.com" tabindex="5"></th>
-                </tr>
-                <tr>
-                    <th>선호하는 거래지역</th>
-                    <th><input type="text" name="region" maxlength="20" tabindex="6"
-                               placeholder="예) 대전, 홍대놀이터 등"></th>
-                </tr>
-                <tr>
-                    <th colspan="3" style="padding: 0%; font-size: 10pt; color: brown">
-                        <p>* 간단한 지역만 작성해주세요(지역명, 지역의 유명한 상징 등)</p>
-                    </th>
-                </tr>
-                <tr>
-                    <th>휴대폰 번호</th>
-                    <th><input type="tel" name="phone" maxlength="12" tabindex="7"
-                               placeholder="'-'을 제외함"></th>
-                </tr>
-                <tr>
-                    <th colspan="3">
-                        <input type="button" value="회원가입" onclick="checkForm()">
-                    </th>
-                </tr>
-            </table>
-        </form>
-    </center>
-</article>
-</body>
-</html>
+            <tr>
+                <th>닉네임</th>
+                <th><input type="text" name="nickname" tabindex="4" maxlength="12" id="nick_form"
+                           placeholder="12자 이하여야 합니다. ">
+                </th>
+                <th>
+                    <input type="text" name="nick_status" readonly disabled tabindex="0"
+                           style="background-color:white; color: maroon; border: 0; width: 100%;">
+                    <input type="hidden" name="nick_check" id="nick_check" value=false>
+                </th>
+            </tr>
+            <tr>
+                <th>이메일 주소</th>
+                <th><input type="email" name="email" max="40" placeholder="abc@def.com" tabindex="5"></th>
+            </tr>
+            <tr>
+                <th>선호하는 거래지역</th>
+                <th><input type="text" name="region" maxlength="20" tabindex="6"
+                           placeholder="예) 대전, 홍대놀이터 등"></th>
+            </tr>
+            <tr>
+                <th colspan="3" style="padding: 0%; font-size: 10pt; color: brown">
+                    <p>* 간단한 지역만 작성해주세요(지역명, 지역의 유명한 상징 등)</p>
+                </th>
+            </tr>
+            <tr>
+                <th>휴대폰 번호</th>
+                <th><input type="tel" name="phone" maxlength="12" tabindex="7"
+                           placeholder="'-'을 제외함"></th>
+            </tr>
+            <tr>
+                <th colspan="3">
+                    <input type="button" value="회원가입" onclick="checkForm()">
+                </th>
+            </tr>
+        </table>
+    </form>
+</center>

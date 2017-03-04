@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
+</head>
+<body>
+<header>
+    <div class="userFunction">
+        <% if (!user.userId) { %>
+        <input type="button" value="로그인" id="signin" onclick="location.href='/signin'">
+        <input type="button" value="회원가입" id="signup" onclick="location.href='/signUp'">
+        <% } else { %>
+        <%= user.nickname %>님(<%= user.userId %>)
+        <input type="button" value="로그아웃" id="signout" onclick="location.href='/signout'">
+        <input type="button" value="물품등록" id="writeproduct" onclick="location.href='/writeproduct'">
+        <% } %>
+    </div>
+    <div style="clear: both;">
+        <center>
+            <a href="/"><img src="/images/shopping-cart.png" height="150px"></a>
+        </center>
+    </div>
+</header>
+<article>
+    <%- body %>
+</article>
+</body>
+</html>

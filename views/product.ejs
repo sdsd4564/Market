@@ -1,67 +1,54 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css'/>
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="/socket.io/socket.io.js"></script>
-    <script>
+<% layout('layout') %>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    $(document).ready(function () {
+        let room = '<% params.pid %>';
         const socket = io('//localhost:5874');
+
         socket.on('socketToMe', function (data) {
             console.log(data);
         });
 
-    </script>
-</head>
-<body>
-<header>
-    <div class="userFunction">
-        <% if (!user.userId) { %>
-        <input type="button" value="로그인" id="signin" onclick="location.href='/signin'">
-        <input type="button" value="회원가입" id="signup" onclick="location.href='/signUp'">
-        <% } else { %>
-        <%= user.nickname %>님(<%= user.userId %>)
-        <input type="button" value="로그아웃" id="signout" onclick="location.href='/signout'">
-        <input type="button" value="물품등록" id="writeproduct" onclick="location.href='/writeproduct'">
-        <% } %>
+        socket.emit('join');
+        socket.on('trading', function (data) {
+            location.href = "/" + '<%= params.category %>' + "/" + '<%= params.pid %>' + "/trading";
+        })
+
+        $('.button').on('click', function () {
+            if (confirm('거래를 신청하시겠습니까?')) {
+                socket.emit('trading', 'socketio');
+            } else {
+                console.log('취소했엉...');
+            }
+        });
+    })
+</script>
+<div id="jb-container">
+    <div id="jb-content">
+        <img src="<%= product[0].image %>" align="center">
     </div>
-    <div style="clear: both;">
+    <div id="jb-sidebar">
+        <h1 class="pName"><%= product[0].title %></h1>
         <center>
-            <a href="/"><img src="/images/shopping-cart.png" height="150px"></a>
+            <table>
+                <tr>
+                    <th><h4 class="pInfo">가격</h4></th>
+                    <th><h2 class="pInfo"><%= product[0].price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") %>
+                            원</h2></th>
+                </tr>
+                <tr>
+                    <th><h4 class="pInfo">거래지역</h4></th>
+                    <th><h3 class="pInfo"><%= product[0].region %></h3></th>
+                </tr>
+                <tr>
+                    <th style="padding: 50px 0 40px 0;" colspan="2" rowspan="3">
+                        <a class='button'>거래신청</a>
+                    </th>
+                </tr>
+            </table>
         </center>
     </div>
-</header>
-<article>
-    <div id="jb-container">
-        <div id="jb-content">
-            <img src="<%= product[0].image %>" align="center">
-        </div>
-        <div id="jb-sidebar">
-            <h1 class="pName"><%= product[0].title %></h1>
-            <center>
-                <table>
-                    <tr>
-                        <th><h4 class="pInfo">가격</h4></th>
-                        <th><h2 class="pInfo"><%= product[0].price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") %>
-                                원</h2></th>
-                    </tr>
-                    <tr>
-                        <th><h4 class="pInfo">거래지역</h4></th>
-                        <th><h3 class="pInfo"><%= product[0].region %></h3></th>
-                    </tr>
-                    <tr>
-                        <th style="padding: 50px 0 40px 0;" colspan="2" rowspan="3">
-                            <a href='#' class='button'>Button</a>
-                        </th>
-                    </tr>
-                </table>
-            </center>
-        </div>
-        <div id="jb-footer">
-            <p><%- product[0].description %></p>
-        </div>
+    <div id="jb-footer">
+        <p><%- product[0].description %></p>
     </div>
-</article>
-</body>
-</html>
+</div>

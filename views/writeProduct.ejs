@@ -1,78 +1,49 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css'/>
-    <script src="/ckeditor/ckeditor.js"></script>
-    <style>
-        table tr {
-            height: 50px;
-        }
+<% layout('layout') %>
+<script src="/ckeditor/ckeditor.js"></script>
+<style>
+    table tr {
+        height: 50px;
+    }
 
-        table th {
-            padding: 0;
-            width: 70px;
-        }
-    </style>
-
-</head>
-<body>
-<header>
-    <div class="userFunction">
-        <% if (!user.userId) { %>
-        <input type="button" value="로그인" id="signin" onclick="location.href='/signin'">
-        <input type="button" value="회원가입" id="signup" onclick="location.href='/signUp'">
-        <% } else { %>
-        <%= user.nickname %>님(<%= user.userId %>)
-        <input type="button" value="로그아웃" id="signout" onclick="location.href='/signout'">
-        <input type="button" value="물품등록" id="writeproduct" onclick="location.href='/writeproduct'">
-        <% } %>
+    table th {
+        padding: 0;
+        width: 70px;
+    }
+</style>
+<form method="post">
+    <div>
+        <select name="category" id="pw_category">
+            <option value="1">서적, 책</option>
+            <option value="3">화장품</option>
+            <option value="4">의류, 악세서리</option>
+            <option value="5">가구</option>
+            <option value="6">가전, 전자제품</option>
+            <option value="2">etc</option>
+        </select>
+        <input type="text" name="title" id="pw_title" size="100%" placeholder="상품 제목">
     </div>
-    <div style="clear: both;">
-        <center>
-            <a href="/"><img src="/images/shopping-cart.png" height="150px"></a>
-        </center>
-    </div>
-</header>
-<article>
-    <form method="post">
-        <div>
-            <select name="category" id="pw_category">
-                <option value="1">서적, 책</option>
-                <option value="3">화장품</option>
-                <option value="4">의류, 악세서리</option>
-                <option value="5">가구</option>
-                <option value="6">가전, 전자제품</option>
-                <option value="2">etc</option>
-            </select>
-            <input type="text" name="title" id="pw_title" size="100%" placeholder="상품 제목">
-        </div>
-        <table>
-            <tr>
-                <th style="padding: 0 0 0 40px"><h3 style="width: 50px; margin: 0;">가격</h3></th>
-                <th><input type="number" name="price" id="pw_price" min="0"></th>
-            </tr>
-            <tr>
-                <th style="padding: 0 0 0 40px"><h5 style="width: 50px; margin: 0;">거래지역</h5></th>
-                <th><input type="text" name="region" id="pw_region" placeholder="간단하게만 작성"></th>
-            </tr>
-        </table>
-        <div>
+    <table>
+        <tr>
+            <th style="padding: 0 0 0 40px"><h3 style="width: 50px; margin: 0;">가격</h3></th>
+            <th><input type="number" name="price" id="pw_price" min="0"></th>
+        </tr>
+        <tr>
+            <th style="padding: 0 0 0 40px"><h5 style="width: 50px; margin: 0;">거래지역</h5></th>
+            <th><input type="text" name="region" id="pw_region" placeholder="간단하게만 작성"></th>
+        </tr>
+    </table>
+    <div>
             <textarea name="description" id="pw_description" rows="10" cols="80">
                 상품에 대한 정보를 입력해주세요
             </textarea>
-        </div>
-        <input type="submit">
-    </form>
-    <script>
-        // Replace the <textarea id="editor1"> with a CKEditor
-        // instance, using default configuration.
-        CKEDITOR.replace('description', {
-            filebrowserUploadUrl: '/uploader',
-            height: '500px'
-        });
-    </script>
-</article>
-</body>
-</html>
+    </div>
+    <input type="submit">
+</form>
+<script>
+    // Replace the <textarea id="editor1"> with a CKEditor
+    // instance, using default configuration.
+    CKEDITOR.replace('description', {
+        filebrowserUploadUrl: '/uploader',
+        height: '500px'
+    });
+</script>

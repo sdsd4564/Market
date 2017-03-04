@@ -1,4 +1,5 @@
 const express = require('express');
+const ejs = require('ejs-locals');
 const helmet = require('helmet');
 const path = require('path');
 const favicon = require('serve-favicon');
@@ -29,6 +30,7 @@ const writeProduct = require('./routes/writeProduct');
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+app.engine('ejs', ejs);
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
