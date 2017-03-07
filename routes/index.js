@@ -6,7 +6,7 @@ const db = require('../mysql');
 router.get('/', function (req, res, next) {
 
     const query1 = 'SELECT pid, id, nickname, regdate, title, price, ' +
-        'description, image, product.region, category.name ' +
+        'description, image, product.region, category.name, state ' +
         'FROM product ' +
         'LEFT OUTER JOIN user ' +
         'ON product.seller = user.uid ' +

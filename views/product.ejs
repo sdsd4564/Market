@@ -16,7 +16,7 @@
 
         $('.button').on('click', function () {
             if (confirm('거래를 신청하시겠습니까?')) {
-                socket.emit('trading', 'socketio');
+                location.href = "/" + '<%= params.category %>' + "/" + '<%= params.pid %>' + "/trading";
             } else {
                 console.log('취소했엉...');
             }
@@ -39,6 +39,14 @@
                 <tr>
                     <th><h4 class="pInfo">거래지역</h4></th>
                     <th><h3 class="pInfo"><%= product[0].region %></h3></th>
+                </tr>
+                <tr>
+                    <th><h4 class="pInfo">판매자정보</h4></th>
+                    <th><h3 class="pInfo"><%= product[0].nickname %> (<%= product[0].id %>)</h3></th>
+                </tr>
+                <tr>
+                    <th><h4 class="pInfo">물품등록날짜</h4></th>
+                    <th><h3 class="pInfo"><%= product[0].regdate %></h3></th>
                 </tr>
                 <tr>
                     <th style="padding: 50px 0 40px 0;" colspan="2" rowspan="3">

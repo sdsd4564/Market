@@ -1,0 +1,42 @@
+<% layout('layout') %>
+<script>
+    function cancelTrade() {
+        if (confirm('정말 이 물품거래를 취소하시겠습니까?')) {
+            $('#tradeCancle').submit();
+        } else {
+
+        }
+    }
+</script>
+<center>
+    <table class="type10">
+        <thead>
+        <tr>
+            <th>품목ID</th>
+            <th>품목이름</th>
+            <th>판매자</th>
+            <th>가격</th>
+            <th>상태</th>
+            <th>신청일시</th>
+            <th>거래취소</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% product.forEach(function (obj) { %>
+        <tr>
+            <th><%= obj.pid %></th>
+            <th><%= obj.title %></th>
+            <th><%= obj.nickname %></th>
+            <th><%= obj.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") %>원</th>
+            <th><%= obj.state %></th>
+            <th><%= obj.tradedate %></th>
+            <th>
+                <form id="tradeCancle" action="/trading/<%= user.userId%>/<%=obj.pid%>/cancel" method="post">
+                    <input type="button" value="취소"  onclick="cancelTrade()">
+                </form>
+            </th>
+        </tr>
+        <% }) %>
+        </tbody>
+    </table>
+</center>

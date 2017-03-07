@@ -16,6 +16,7 @@
         <%= user.nickname %>님(<%= user.userId %>)
         <input type="button" value="로그아웃" id="signout" onclick="location.href='/signout'">
         <input type="button" value="물품등록" id="writeproduct" onclick="location.href='/writeproduct'">
+        <input type="button" value="내 거래품목" id="inTrade" onclick="location.href='/trading/'+'<%= user.userId%>'">
         <% } %>
     </div>
     <div style="clear: both;">

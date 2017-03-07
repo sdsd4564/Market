@@ -1,6 +1,7 @@
 <% layout('layout') %>
 <div id="columns">
     <% products.forEach(function (obj) { %>
+    <% if(obj.state == 0) { %>
     <figure onclick="location.href=('<%= '/' + obj.name + '/' + obj.pid %>')">
         <img src="<%= obj.image %>">
         <figcaption>
@@ -12,5 +13,6 @@
             </div>
         </figcaption>
     </figure>
+    <% } %>
     <% }); %>
 </div>

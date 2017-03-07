@@ -17,7 +17,6 @@ router.get('/signup', function (req, res, next) {
             title: 'Syslet',
             user: req.session
         });
-
 });
 
 router.post('/signup', function (req, res) {

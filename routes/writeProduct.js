@@ -73,7 +73,8 @@ router.post('/uploader', multipartMiddleware, function (req, res) {
                         mkdirp('./public/uploads/' + req.session.userId, function (fsUsermkdirErr) { // 유저아이디로 된 폴더 생성
                             if (fsUsermkdirErr) console.error(fsUsermkdirErr);
                             else {
-                                mkdirp('./public/uploads/' + req.session.userId + '/' + newProduct, function (fsProductmkdirErr) { // pid로 된 폴더 생성(public/유저아이디/pid)
+                                // pid로 된 폴더 생성(public/유저아이디/pid)
+                                mkdirp('./public/uploads/' + req.session.userId + '/' + newProduct, function (fsProductmkdirErr) {
                                     if (fsProductmkdirErr) console.error(fsProductmkdirErr);
                                     else {
                                         newUrl = "/uploads/" + req.session.userId + '/' + newProduct + '/' + req.files.upload.name;
