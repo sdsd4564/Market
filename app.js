@@ -49,7 +49,7 @@ app.use(session({
         host: 'localhost',
         port: 3306,
         user: 'root',
-        password: 'gkswogus15',
+        password: 'gkgkgk',
         database: 'market'
     })
 }));
